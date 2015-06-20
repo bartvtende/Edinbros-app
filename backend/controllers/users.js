@@ -45,7 +45,8 @@ router.post('/signup', function(req, res) {
         var user = new User({
             email: req.body.email,
             password: req.body.password,
-            name: req.body.name
+            name: req.body.name,
+            points: 0
         });
 
         if (req.body.image != null)

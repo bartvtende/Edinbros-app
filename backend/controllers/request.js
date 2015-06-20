@@ -4,6 +4,7 @@ var router = express.Router();
 var auth = require('./auth');
 
 var Request = require('../models/request');
+var User = require('../models/users');
 
 /**
  * Get all the requests
@@ -165,6 +166,65 @@ router.get('/:id/join', auth.isAuthenticated, function(req, res) {
                 result: 'Joined!'
             });
         })
+    })
+});
+
+/**
+ * Mark a request as done
+ */
+
+router.post('/mark', auth.isAuthenticated, function(req, res) {
+    var id = req.body._id;
+    var pointsPerRequest = 10;
+
+    if (id == null || id == '') {
+        return res.json({
+            error: 'You don\'t own this project!',
+            result: ''
+        });
+    }
+
+    Request.findById(id, function(err, task) {
+        var task = task.toObject();
+
+        if (task.requester.toString() != req.user._id.toString()) {
+            return res.json({
+                error: 'You don\'t own this project!',
+                result: ''
+            });
+        }
+
+        if (task.done) {
+            return res.json({
+                error: 'Request is already marked as completed!',
+                result: ''
+            });
+        }
+
+        task.done = true;
+
+        // TODO: refactor, this is shitty
+        Request.findByIdAndUpdate(id, task, function(err, task2) {
+            console.log(task.signups.length);
+            if (task.signups.length > 0) {
+                for (var i = 0; i < task.signups.length; i++) {
+                    var userId = task.signups[i];
+                    User.findById(userId, function(err, user) {
+                        var user = user.toObject();
+
+                        console.log('p: '+ pointsPerRequest + user.points);
+
+                        user.points = user.points + pointsPerRequest;
+
+                        console.log(user.points);
+
+                        User.findByIdAndUpdate(userId, user, function() {
+                            // Empty
+                        });
+                    });
+                }
+            }
+        });
     })
 });
 
