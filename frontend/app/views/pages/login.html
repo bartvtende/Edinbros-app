@@ -1,1 +1,23 @@
 <button ng-click="authenticate('facebook')">Sign in with Facebook</button>
+
+<h4>Signup</h4>
+
+<form ng-submit="signup(user)">
+    <input ng-model="user.name" type="text" placeholder="Name">
+
+    <input ng-model="user.email" type="email" placeholder="Email">
+
+    <input ng-model="user.password" type="password" placeholder="Password">
+
+    <button>Signup!</button>
+</form>
+
+<h4>Login</h4>
+
+<form ng-submit="login(user2)">
+    <input ng-model="user2.email" type="email" placeholder="Email">
+
+    <input ng-model="user2.password" type="password" placeholder="Password">
+
+    <button>Login!</button>
+</form>

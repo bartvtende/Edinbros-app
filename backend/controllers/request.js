@@ -7,15 +7,19 @@ var Request = require('../models/request');
 var User = require('../models/users');
 
 /**
- * Get all the requests
+ * Get all the requests that are not completed
  */
 router.get('/', auth.isAuthenticated, function(req, res) {
-    Request.find({}, function(err, requests) {
-        return res.json({
-            error: '',
-            result: requests
+    Request
+        .find({})
+        .where('done').equals(false)
+        .sort({'createdAt': 'desc'})
+        .exec(function(err, requests) {
+            return res.json({
+                error: '',
+                result: requests
+            });
         });
-    });
 });
 
 /**
