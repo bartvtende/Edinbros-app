@@ -15,15 +15,21 @@ angular
     'ngResource',
     'ngSanitize',
     'ngTouch',
-    'ui.router'
+    'ui.router',
+        'satellizer'
   ])
-  .config(function ($urlRouterProvider, $stateProvider) {
-    $urlRouterProvider.otherwise('/');
+  .config(function ($urlRouterProvider, $stateProvider, $authProvider) {
+        $authProvider.facebook({
+            //url: 'https://localhost:9000/auth/facebook',
+            clientId: '859012174170344'
+        });
+
+        $urlRouterProvider.otherwise('/');
 
     // Define the states (routes)
     $stateProvider
       .state('overview', {
-        url: '/',
+
         templateUrl: 'views/layouts/main.html'
       })
       .state('overview.home', {
@@ -35,6 +41,16 @@ angular
         url: '/about',
         templateUrl: 'views/pages/about.html',
         controller: 'AboutCtrl'
-      });
+      })
+        .state('task', {
+            url: '/request/:id',
+            templateUrl: 'views/pages/request.html',
+            controller: 'RequestCtrl'
+        })
+        .state('login', {
+            url: '/login/',
+            templateUrl: 'views/pages/login.html',
+            controller: 'LoginCtrl'
+        });
 
   });
