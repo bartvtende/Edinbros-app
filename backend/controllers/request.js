@@ -47,7 +47,7 @@ router.post('/', auth.isAuthenticated, function(req, res) {
 });
 
 router.put('/', auth.isAuthenticated, function(req, res) {
-    var id = req.body.id;
+    var id = req.body._id;
 
         Request.findOneAndUpdate({ _id: id }, req.body, function(err, request) {
             var request = request.toObject();
@@ -74,7 +74,7 @@ router.put('/', auth.isAuthenticated, function(req, res) {
 });
 
 router.delete('/', auth.isAuthenticated, function(req, res) {
-    var id = req.body.id;
+    var id = req.body._id;
 
     if (id == null || id == '') {
         return res.json({
