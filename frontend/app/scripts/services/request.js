@@ -37,4 +37,5 @@ angular.module('edinbrosApp')
       this.mark = function(id) {
         return $http.post(urls.API + '/request/mark', id);
       };
+
   });

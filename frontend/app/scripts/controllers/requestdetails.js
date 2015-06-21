@@ -12,6 +12,7 @@ angular.module('edinbrosApp')
   .controller('RequestDetailsCtrl', function ($scope, Request, $stateParams, $state, $mdToast, $auth, Chat) {
 
       $scope.showChat = false;
+      $scope.showMark = false;
 
       $scope.$watch('$viewContentLoaded', function() {
         if ($stateParams.id == null || $stateParams.id == '')
@@ -70,6 +71,10 @@ angular.module('edinbrosApp')
               $scope.showChat = true;
           }
 
+          if (request.requester == $auth.getPayload().sub && request.done == false) {
+              $scope.showMark = true;
+          }
+
           if (request.signups != null) {
             for (var i = 0; i < request.signups.length; i++) {
                 if (request.signups[i] == $auth.getPayload().sub) {
@@ -84,7 +89,6 @@ angular.module('edinbrosApp')
 
             socky.on('receive', function(msg) {
                 $scope.$apply(function() {
-                    console.log('YEA BABY');
                     $scope.messages.push({image: 'http://placehold.it/50x50', userId: 'Willem', message: msg.message, time: msg.createdAt});
                     $mdToast.show(
                         $mdToast.simple()
@@ -111,6 +115,27 @@ angular.module('edinbrosApp')
 
             // Stop the form from submitting
             return false;
-        }
+        };
+
+        $scope.mark = function() {
+            Request.mark({_id: $stateParams.id})
+                .success(function() {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content('Your request has been marked as completed!')
+                            .position('bottom left')
+                            .hideDelay(3000)
+                    );
+                    $state.go('overview.home');
+                })
+                .error(function() {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content('Something went wrong!')
+                            .position('bottom left')
+                            .hideDelay(3000)
+                    );
+                })
+        };
 
   });

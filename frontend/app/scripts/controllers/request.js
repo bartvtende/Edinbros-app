@@ -24,12 +24,12 @@ angular.module('edinbrosApp')
 
 
   })
-    .controller('CreateRequestCtrl', function ($scope,$http,Request){
+    .controller('CreateRequestCtrl', function ($scope, $http, Request, $state){
 
         $scope.submit = function(){
             Request.create($scope.request)
                 .success(function(){
-                    //REDIRECT
+                    $state.go('overview.home');
                 })
                 .error(function(){
                     console.log("API CALL FAILED");

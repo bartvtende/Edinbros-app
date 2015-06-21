@@ -15,7 +15,7 @@
                         <h2 class="md-display-2">{{user.name}}<small> - {{user.points || 0}} points</small></h2>
                         <md-list class="unstyled">
                             <md-list-item class="md-3-line"><b>E-mail</b>: {{user.email}}</md-list-item>
-                            <md-list-item class="md-3-line">Skills: {{user.skills}}</md-list-item>
+                            <md-list-item class="md-3-line"><b>Skills</b>: {{user.skills || 'None filled in yet'}}</md-list-item>
                             <md-list-item class="md-3-line"><b>Member since</b>: {{user.createdAt | date}}</md-list-item>
                         </md-list>
                     </div>

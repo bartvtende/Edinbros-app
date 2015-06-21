@@ -11,13 +11,15 @@
 
 <md-list>
   <div ng-repeat="request in requests">
-    <md-list-item class="md-3-line" >
-      <img ng-src="{{request.image}}" class="md-avatar" alt="{{request.name}}" />
+    <md-list-item class="md-3-line">
+      <img ng-if="request.image" ng-src="{{request.image}}" class="md-avatar" alt="{{request.name}}" />
+      <img ng-if="!request.image" ng-src="http://placehold.it/50x50" class="md-avatar" alt="{{request.name}}" />
       <div class="md-list-item-text">
         <h3 ui-sref="overview.request-details({ id: request._id })" style="cursor: pointer;">{{ request.title || 'No title' }}</h3>
         <h4>Placed by {{ request.name || 'a deleted member'}}</h4>
         <p>{{ request.description }}</p>
       </div>
+      <div class="md-secondary md-hue-3">{{request.location || 'No location'}}</div>
     </md-list-item>
     <md-divider></md-divider>
   </div>
