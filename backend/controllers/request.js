@@ -15,10 +15,17 @@ router.get('/', auth.isAuthenticated, function(req, res) {
         .where('done').equals(false)
         .sort({'createdAt': 'desc'})
         .exec(function(err, requests) {
-            return res.json({
-                error: '',
-                result: requests
-            });
+            for (var i = 0; i < requests.length; i++) {
+                User.findById(requests[i].requester, function(err, user) {
+                    if(user != null) {
+                        requests[i].user = user;
+                        return res.json({
+                            error: '',
+                            result: requests
+                        });
+                    }
+                });
+            }
         });
 });
 
@@ -29,6 +36,13 @@ router.get('/:id', auth.isAuthenticated, function(req, res) {
     var id = req.params.id;
 
     Request.findOne({ _id: id }, function(err, request) {
+        if (err) {
+            return res.json({
+                error: 'Something went wrong!',
+                result: ''
+            });
+        }
+
         var request = request.toObject();
         if (request.requester) {
             User.findOne({ _id: request.requester }, function(err, user) {
@@ -184,7 +198,6 @@ router.get('/:id/join', auth.isAuthenticated, function(req, res) {
 /**
  * Mark a request as done
  */
-
 router.post('/mark', auth.isAuthenticated, function(req, res) {
     var id = req.body._id;
     var pointsPerRequest = 10;

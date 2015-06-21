@@ -10,6 +10,9 @@ var settings = require('../config/settings');
 
 var User = require('../models/users');
 
+/**
+ * Login with a JWT (email)
+ */
 router.post('/login', function(req, res) {
     User.findOne({ email: req.body.email }, function(err, user) {
         if (!user) {
@@ -36,6 +39,9 @@ router.post('/login', function(req, res) {
     });
 });
 
+/**
+ * Signup for Edinbros with email
+ */
 router.post('/signup', function(req, res) {
     User.findOne({email: req.body.email}, function (err, existingUser) {
         if (existingUser) {
@@ -72,6 +78,9 @@ router.post('/signup', function(req, res) {
     });
 });
 
+/**
+ * Gets the profile of yourself
+ */
 router.get('/', auth.isAuthenticated, function(req, res) {
     var user = req.user.toObject();
     user.password = '';
@@ -82,6 +91,9 @@ router.get('/', auth.isAuthenticated, function(req, res) {
     });
 });
 
+/**
+ * Gets the profile of another user
+ */
 router.get('/:userId', auth.isAuthenticated, function(req, res) {
     var id = req.params.userId;
 
@@ -97,12 +109,13 @@ router.get('/:userId', auth.isAuthenticated, function(req, res) {
     })
 });
 
+/**
+ * Adds a skill to your profile
+ */
 router.post('/skillset', auth.isAuthenticated, function(req, res) {
     var name = req.body.name;
     var user = req.user.toObject();
     var exists = false;
-
-    console.log(user.skillset);
 
     if (name == null || name == '') {
         return res.json({
@@ -112,8 +125,6 @@ router.post('/skillset', auth.isAuthenticated, function(req, res) {
     }
 
     var skillset = user.skillset;
-
-    console.log(skillset);
 
     if (skillset == null || skillset.length == 0 || skillset == '[]') {
         console.log('Empty!');
@@ -143,6 +154,13 @@ router.post('/skillset', auth.isAuthenticated, function(req, res) {
 
 router.delete('/skillset', auth.isAuthenticated, function(req, res) {
     var name = req.body.name;
+
+    if (name == null || name == '') {
+        return res.json({
+            error: 'You didn\'t provide a name!',
+            result: ''
+        });
+    }
 });
 
 module.exports = router;
