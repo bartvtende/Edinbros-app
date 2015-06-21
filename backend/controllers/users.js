@@ -46,7 +46,8 @@ router.post('/signup', function(req, res) {
             email: req.body.email,
             password: req.body.password,
             name: req.body.name,
-            points: 0
+            points: 0,
+            skillset: []
         });
 
         if (req.body.image != null)
@@ -74,7 +75,6 @@ router.post('/signup', function(req, res) {
 router.get('/', auth.isAuthenticated, function(req, res) {
     var user = req.user.toObject();
     user.password = '';
-    console.log(user);
 
     return res.json({
         error: '',
@@ -95,6 +95,54 @@ router.get('/:userId', auth.isAuthenticated, function(req, res) {
             result: user
         });
     })
+});
+
+router.post('/skillset', auth.isAuthenticated, function(req, res) {
+    var name = req.body.name;
+    var user = req.user.toObject();
+    var exists = false;
+
+    console.log(user.skillset);
+
+    if (name == null || name == '') {
+        return res.json({
+            error: 'You didn\'t provide a name!',
+            result: ''
+        });
+    }
+
+    var skillset = user.skillset;
+
+    console.log(skillset);
+
+    if (skillset == null || skillset.length == 0 || skillset == '[]') {
+        console.log('Empty!');
+    } else {
+        for (var i = 0; i < skillset.length; i++) {
+            if (skillset[i] == name) {
+                exists = true;
+            }
+        }
+    }
+
+    if (exists) {
+        return res.json({
+            error: 'You already have added this skill!',
+            result: ''
+        });
+    } else {
+        User.findByIdAndUpdate(req.user._id, {$push: {"skillset": name}}, function(err, user) {
+            return res.json({
+                error: '',
+                result: 'Skill has been added!'
+            });
+        })
+    }
+
+});
+
+router.delete('/skillset', auth.isAuthenticated, function(req, res) {
+    var name = req.body.name;
 });
 
 module.exports = router;
