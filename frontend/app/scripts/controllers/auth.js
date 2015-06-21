@@ -18,16 +18,8 @@ angular.module('edinbrosApp')
                             .position('bottom left')
                             .hideDelay(3000)
                     );
-                })
-                .then(function() {
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .content('Something went wrong!')
-                            .position('bottom left')
-                            .hideDelay(3000)
-                    );
                 });
-
+            
             return false;
         };
 
@@ -38,14 +30,6 @@ angular.module('edinbrosApp')
                     $mdToast.show(
                         $mdToast.simple()
                             .content('You are now logged in!')
-                            .position('bottom left')
-                            .hideDelay(3000)
-                    );
-                })
-                .then(function() {
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .content('Something went wrong!')
                             .position('bottom left')
                             .hideDelay(3000)
                     );
