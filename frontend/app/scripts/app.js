@@ -65,6 +65,11 @@ angular
             url: '/login',
             templateUrl: 'views/pages/login.html',
             controller: 'LoginCtrl'
+        })
+        .state('overview.profile', {
+            url: '/user/:id',
+            templateUrl: 'views/pages/user.html',
+            controller: 'UserCtrl'
         });
 
 
