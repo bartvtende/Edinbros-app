@@ -2,7 +2,7 @@
 
 
 angular.module('edinbrosApp')
-  .controller('RequestCtrl', function ($scope,$stateParams,$http) {
+  .controller('RequestCtrl', function ($scope,$stateParams,$http,Request) {
     $scope.stateParams = $stateParams;
     $scope.userId = $scope.stateParams.id;
 
