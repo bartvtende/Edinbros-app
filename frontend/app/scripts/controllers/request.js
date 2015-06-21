@@ -6,7 +6,7 @@ angular.module('edinbrosApp')
     $scope.stateParams = $stateParams;
     $scope.userId = $scope.stateParams.id;
 
-    $http.get('http://localhost:3000/api/request/'+$scope.stateParams.id)
+    Request.get($scope.stateParams.id)
         .success(function(data){
             console.log(data);
             $scope.request = data;
@@ -20,10 +20,10 @@ angular.module('edinbrosApp')
 
 
   })
-    .controller('CreateRequestCtrl', function ($scope,$http){
+    .controller('CreateRequestCtrl', function ($scope,$http,Request){
 
         $scope.submit = function(){
-            $http.post('http://localhost:3000/api/request', $scope.request)
+            Request.create($scope.request)
                 .success(function(){
                     //REDIRECT
                 })
