@@ -71,4 +71,30 @@ router.post('/signup', function(req, res) {
     });
 });
 
+router.get('/', auth.isAuthenticated, function(req, res) {
+    var user = req.user.toObject();
+    user.password = '';
+    console.log(user);
+
+    return res.json({
+        error: '',
+        result: user
+    });
+});
+
+router.get('/:userId', auth.isAuthenticated, function(req, res) {
+    var id = req.params.userId;
+
+    User.findOne({ _id: id }, function(err, user) {
+        var user = user.toObject();
+
+        user.password = '';
+
+        return res.json({
+            error: '',
+            result: user
+        });
+    })
+});
+
 module.exports = router;
