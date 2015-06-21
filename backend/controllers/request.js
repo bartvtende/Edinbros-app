@@ -29,10 +29,18 @@ router.get('/:id', auth.isAuthenticated, function(req, res) {
     var id = req.params.id;
 
     Request.findOne({ _id: id }, function(err, request) {
-        return res.json({
-            error: '',
-            result: request
-        });
+        var request = request.toObject();
+        if (request.requester) {
+            User.findOne({ _id: request.requester }, function(err, user) {
+                return res.json({
+                    error: '',
+                    result: {
+                        request: request,
+                        user: user
+                    }
+                });
+            });
+        }
     });
 });
 

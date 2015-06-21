@@ -11,8 +11,8 @@
     <md-list-item class="md-3-line" >
       <img ng-src="{{request.image}}" class="md-avatar" alt="{{request.name}}" />
       <div class="md-list-item-text">
-        <h3>{{ request.title }}</h3>
-        <h4>Placed by {{ request.name }}</h4>
+        <h3 ui-sref="overview.request-details({ id: request._id })" style="cursor: pointer;">{{ request.title || 'No title' }}</h3>
+        <h4>Placed by {{ request.name || 'a deleted member'}}</h4>
         <p>{{ request.description }}</p>
       </div>
     </md-list-item>

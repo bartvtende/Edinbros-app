@@ -36,8 +36,6 @@ angular
         clientId: '859012174170344'
     });
 
-    $urlRouterProvider.otherwise('/');
-
     // Define the states (routes)
     $stateProvider
       .state('overview', {
@@ -53,10 +51,10 @@ angular
         templateUrl: 'views/pages/about.html',
         controller: 'AboutCtrl'
       })
-        .state('task', {
+        .state('overview.request-details', {
             url: '/request/:id',
-            templateUrl: 'views/pages/request.html',
-            controller: 'RequestCtrl'
+            templateUrl: 'views/pages/request-details.html',
+            controller: 'RequestDetailsCtrl'
         })
         .state('login', {
             url: '/login/',
@@ -64,4 +62,5 @@ angular
             controller: 'LoginCtrl'
         });
 
-  });
+        $urlRouterProvider.otherwise('/');
+});
