@@ -2,6 +2,8 @@
 
 A social marketplace for services in your neighbourhood. Made during the hackathon CodeTheCity 4  in Edinbourgh, Scotland.
 
+![](http://i.imgur.com/y2gNKYi.png)
+
 ## Stack
 * Node.js/Express as a RESTful API
 * MongoDB as the database
