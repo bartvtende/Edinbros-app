@@ -2,7 +2,7 @@
 
 
 angular.module('edinbrosApp')
-  .controller('RequestCtrl', function ($scope,$stateParams,$http,Request) {
+  .controller('RequestCtrl', function ($scope, $stateParams, $http, Request, $state) {
     $scope.stateParams = $stateParams;
     $scope.userId = $scope.stateParams.id;
 
@@ -16,6 +16,10 @@ angular.module('edinbrosApp')
             console.log($scope.errors);
         });
 
+        $scope.goToRequest = function(id) {
+            console.log(id);
+            $state.go('overview.request-details', { id: id });
+        };
 
 
 

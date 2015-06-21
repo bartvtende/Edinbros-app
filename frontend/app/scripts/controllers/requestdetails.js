@@ -53,6 +53,7 @@ angular.module('edinbrosApp')
                           .position('bottom left')
                           .hideDelay(3000)
                   );
+                  $scope.showChat = true;
               })
               .error(function() {
                   $mdToast.show(

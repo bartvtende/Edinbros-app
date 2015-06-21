@@ -1,0 +1,12 @@
+<h1>Leaderboards</h1>
+<md-list>
+    <md-list-item ng-repeat="item in board track by $index" ng-click="goToPerson(item._id)">
+        <img ng-if="item.image" alt="{{item.name}}" ng-src="{{item.image}}" class="md-avatar" />
+        <img ng-if="!item.image" alt="{{item.name}}" ng-src="http://placehold.it/30x30" class="md-avatar" />
+        <md-chips>
+            <md-chip ng-repeat="skill in item.skillset[0] track by $index">{{skill}}</md-chip>
+        </md-chips>
+        <p><b>{{$index + 1}}.</b> {{ item.name }}</p>
+        <div class="md-secondary md-hue-3"><b>{{item.points || 0}}</b> points</div>
+    </md-list-item>
+</md-list>

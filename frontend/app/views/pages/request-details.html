@@ -2,8 +2,8 @@
     <div flex="20">
         <div ng-if="!user.image"><img ng-src="http://placehold.it/150x150"></div>
         <div ng-if="user.image"><img ng-src="user.image"></div>
-        <p><b><a ui-sref="overview.profile({'id': user._id})" style="cursor: pointer;">{{user.name}}</a></b></p>
-        <small>{{user.points}} points</small>
+        <p><b><a ui-sref="overview.profile({'id': user._id})" style="cursor: pointer;">{{user.name || 'Deleted member'}}</a></b></p>
+        <small>{{user.points || 0}} points</small>
     </div>
     <div flex="80">
         <h2>{{request.name}}</h2>

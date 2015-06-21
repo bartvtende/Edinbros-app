@@ -25,7 +25,7 @@ angular
     .config(function($authProvider, urls) {
         $authProvider.baseUrl = urls.API;
         $authProvider.loginRedirect = '/';
-        $authProvider.logoutRedirect = '/login/';
+        $authProvider.logoutRedirect = '/login';
         $authProvider.signupRedirect = '/';
         $authProvider.loginUrl = '/user/login';
         $authProvider.signupUrl = '/user/signup';
@@ -65,6 +65,11 @@ angular
             url: '/login',
             templateUrl: 'views/pages/login.html',
             controller: 'LoginCtrl'
+        })
+        .state('overview.leaderboards', {
+            url: '/leaderboards',
+            templateUrl: 'views/pages/leaderboards.html',
+            controller: 'LeaderboardsCtrl'
         })
         .state('overview.profile', {
             url: '/user/:id',

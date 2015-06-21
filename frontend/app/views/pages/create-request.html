@@ -1,35 +1,24 @@
 <md-content>
-<form ng-submit="submit();" name="requestForm">
+<h1>Create a new request</h1>
+<form ng-submit="submit()" name="requestForm" novalidate>
 <md-input-container>
     <label>Title</label>
     <input md-maxlength="30" required="" name="title" ng-model="request.title">
-    <div ng-messages="requestForm.title.$error" ng-if='requestForm.title.$dirty'>
-        <div ng-message="required">This is required.</div>
-        <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
-    </div>
 </md-input-container>
 
 <md-input-container>
     <label>Description</label>
     <input md-minlength="30" required="" name="description" ng-model="request.description">
-    <div ng-messages="requestForm.description.$error" ng-if='requestForm.description.$dirty'>
-        <div ng-message="required">This is required.</div>
-        <div ng-message="md-maxlength">The description has to be atleast 30 characters long.</div>
-    </div>
 </md-input-container>
 
 <md-input-container>
     <label>Location</label>
     <input required="" name="location" ng-model="request.location">
-    <div ng-messages="requestForm.location.$error" ng-if='requestForm.location.$dirty'>
-        <div ng-message="required">This is required.</div>
-        <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
-    </div>
 </md-input-container>
     <md-input-container flex="">
         <label>Date</label>
-        <input type="date" ng-model="request.date" ng-if='requestForm.date.$dirty'>
+        <input type="date" ng-model="request.date">
     </md-input-container>
-    <md-button type="submit" class="md-primary btn btn-primary">Create request!</md-button>
+    <md-button type="submit" class="md-primary md-raised">Create request!</md-button>
 </form>
 </md-content>

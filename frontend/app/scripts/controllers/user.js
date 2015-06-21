@@ -8,7 +8,7 @@
  * Controller of the frontendApp
  */
 angular.module('edinbrosApp')
-  .controller('UserCtrl', function ($scope, $stateParams,Profile) {
+  .controller('UserCtrl', function ($scope, $stateParams, Profile, $mdToast) {
 
         Profile.get($stateParams.id)
             .success(function(data){
@@ -16,7 +16,12 @@ angular.module('edinbrosApp')
                 $scope.user = data.result;
             })
             .error(function(){
-                console.log("API CALL FAILURE");
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content('Oopsay! Something went wrong')
+                        .position('bottom left')
+                        .hideDelay(3000)
+                );
             })
 
   });
