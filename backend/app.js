@@ -27,10 +27,12 @@ app.use(express.static(path.join(__dirname)));
 // Include controllers
 var request = require('./controllers/request');
 var user = require('./controllers/users');
+var leaderboard = require('./controllers/leaderboard');
 
 // Routes
 app.use('/api/request', request);
 app.use('/api/user', user);
+app.use('/api/leaderboard', leaderboard);
 
 // Run the express server
 app.listen(app.get('port'), function() {
