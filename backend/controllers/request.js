@@ -15,17 +15,33 @@ router.get('/', auth.isAuthenticated, function(req, res) {
         .where('done').equals(false)
         .sort({'createdAt': 'desc'})
         .exec(function(err, requests) {
+            var users = [];
             for (var i = 0; i < requests.length; i++) {
-                User.findById(requests[i].requester, function(err, user) {
-                    if(user != null) {
-                        requests[i].user = user;
-                        return res.json({
-                            error: '',
-                            result: requests
-                        });
-                    }
-                });
+                var request = requests[i].toObject();
+                users.push(request.requester);
             }
+
+            var newRequests = [];
+
+            User.find({"_id": {$in: users}}, function(err, users) {
+                for (var i = 0; i < requests.length; i++) {
+                    var request = requests[i].toObject();
+                    for (var j = 0; j < users.length; j++) {
+                        var user = users[j].toObject();
+
+                        if (request.requester.toString() == user._id.toString()) {
+                            user.password = '';
+                            request.user = user;
+                        }
+                        newRequests.push(request);
+                    }
+                }
+
+                return res.json({
+                    error: '',
+                    result: newRequests
+                });
+            });
         });
 });
 
