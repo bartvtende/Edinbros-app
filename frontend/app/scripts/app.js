@@ -51,16 +51,22 @@ angular
         templateUrl: 'views/pages/about.html',
         controller: 'AboutCtrl'
       })
+        .state('overview.create-request', {
+            url: '/request/create',
+            templateUrl: 'views/pages/create-request.html',
+            controller: 'CreateRequestCtrl'
+        })
         .state('overview.request-details', {
             url: '/request/:id',
             templateUrl: 'views/pages/request-details.html',
             controller: 'RequestDetailsCtrl'
         })
         .state('login', {
-            url: '/login/',
+            url: '/login',
             templateUrl: 'views/pages/login.html',
             controller: 'LoginCtrl'
         });
+
 
         $urlRouterProvider.otherwise('/');
 });
