@@ -1,23 +1,33 @@
-<md-content>
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Settings">
-                <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-            </md-button>
-            <h2>
-                <span>Toolbar with Icon Buttons</span>
-            </h2>
-            <span flex></span>
-            <md-button class="md-icon-button" aria-label="Favorite">
-                <md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="More">
-                <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
-            </md-button>
-        </div>
-    </md-toolbar>
+<div ng-controller="NavbarCtrl">
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+          <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+              <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
+          </md-button>
+          <h1>Edinbro's!</h1>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="spawnProfilePopup($event)" aria-label="Profile">
+            <div flex>
+              <md-icon md-svg-src="images/icons/ic_person_24px.svg" style="color: white;"></md-icon>
+            </div>
+            <md-tooltip>
+              Profile
+            </md-tooltip>
+          </md-button>
+      </div>
+  </md-toolbar>
 
-    <div ui-view></div>
-
-
-</md-content>
+  <div layout="row" flex>
+      <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+        <md-list-item ng-click="navigateTo('overview.home')">
+          <md-icon md-svg-src="images/icons/ic_dashboard_24px.svg"></md-icon>
+          <p>Home</p>
+        </md-list-item>
+      </md-sidenav>
+      <div layout="column" flex id="content">
+          <md-content layout="column" flex class="md-padding">
+              <div ui-view></div>
+          </md-content>
+      </div>
+  </div>
+</div>

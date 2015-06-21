@@ -16,7 +16,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.router',
-    'satellizer'
+    'satellizer',
+    'ngMaterial'
   ])
     .constant('urls', {
         API: 'http://localhost:3000/api'
