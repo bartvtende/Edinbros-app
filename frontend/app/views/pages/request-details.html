@@ -2,6 +2,24 @@
 
 {{request.request}}
 
+{{request.request.createdAt | time}}
 <h4>User</h4>
 
 {{request.user}}
+
+<h4 ng-if="showChat">
+    Chat
+</h4>
+
+<div ng-repeat="message in messages">
+    {{message}}
+</div>
+
+<form ng-submit="sendMessage(message)">
+    <md-input-container flex>
+        <label>Send a message</label>
+        <input ng-model="message">
+    </md-input-container>
+</form>
+
+<md-button class="md-raised md-primary" ng-click="join()">Join this request!</md-button>
