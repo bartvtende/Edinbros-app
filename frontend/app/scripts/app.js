@@ -39,7 +39,15 @@ angular
     // Define the states (routes)
     $stateProvider
       .state('overview', {
-        templateUrl: 'views/layouts/main.html'
+        templateUrl: 'views/layouts/main.html',
+            resolve: {
+              authenticated: ['$location', '$auth', '$state', function($location, $auth, $state) {
+                if (!$auth.isAuthenticated()) {
+                  $state.go('login');
+                  return $location.path('/login');
+                }
+              }]
+            }
       })
       .state('overview.home', {
         url: '/',
@@ -78,5 +86,5 @@ angular
         });
 
 
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/login');
 });
