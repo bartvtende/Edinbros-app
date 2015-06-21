@@ -16,7 +16,7 @@ router.get('/:requestId', auth.isAuthenticated, function(req, res) {
     }
 
     Chat
-        .find({ requestId: requestId})
+        .find({ requesterId: requestId})
         .sort({ createdAt: 'asc' })
         .limit(100)
         .exec(function(err, messages) {

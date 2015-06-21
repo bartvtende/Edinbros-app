@@ -1,25 +1,38 @@
-<h4>Request</h4>
+<div layout="row">
+    <div flex="20">
+        <div ng-if="!user.image"><img ng-src="http://placehold.it/150x150"></div>
+        <div ng-if="user.image"><img ng-src="user.image"></div>
+        <p><b><a ui-sref="overview.profile({'id': user._id})" style="cursor: pointer;">{{user.name}}</a></b></p>
+        <small>{{user.points}} points</small>
+    </div>
+    <div flex="80">
+        <h2>{{request.name}}</h2>
 
-{{request.request}}
+        <p>{{request.description || 'No description!'}}</p>
 
-{{request.request.createdAt | time}}
-<h4>User</h4>
+        <md-divider></md-divider>
+        <br />
 
-{{request.user}}
+        <b>Placed on {{request.createdAt | date}} at {{request.createdAt | time}}</b>
+    </div>
 
-<h4 ng-if="showChat">
-    Chat
-</h4>
-
-<div ng-repeat="message in messages">
-    {{message}}
 </div>
 
-<form ng-submit="sendMessage(message)">
-    <md-input-container flex>
-        <label>Send a message</label>
-        <input ng-model="message">
-    </md-input-container>
-</form>
+<h4</h4>
+
+<div ng-if="showChat">
+    <h4>Chat</h4>
+
+    <div ng-repeat="message in messages">
+        Pietje says: {{message.message}} - {{message.createdAt | ago}}
+    </div>
+
+    <form ng-submit="sendMessage(message)">
+        <md-input-container flex>
+            <label>Send a message</label>
+            <input ng-model="message">
+        </md-input-container>
+    </form>
+</div>
 
 <md-button class="md-raised md-primary" ng-click="join()">Join this request!</md-button>

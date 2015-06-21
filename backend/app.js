@@ -41,12 +41,13 @@ io.on('connection', function(socket){
             return false;
         }
 
-        if (json.requestId == null)
+
+        if (json.requesterId == null)
             return false;
 
         var messageInput = {
-            requestId: json.projectId,
-            senderId: json.userId,
+            requesterId: json.requesterId,
+            userId: json.userId,
             message: json.message
         };
 
@@ -56,7 +57,7 @@ io.on('connection', function(socket){
             if (err)
                 return false;
 
-            io.to('r:' + json.requestId).emit('receive', message);
+            io.to('r:' + json.requesterId).emit('receive', message);
         });
 
     });
