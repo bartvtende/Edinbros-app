@@ -1,6 +1,6 @@
 # Edinbros
 
-A social marketplace for services in your neighbourhood. Made during the hackathon CodeTheCity 4  in Edinbourgh, Scotland.
+A social marketplace for services in your neighbourhood. Made during the hackathon CodeTheCity 4 in Edinbourgh, Scotland.
 
 ![](http://i.imgur.com/y2gNKYi.png)
 
@@ -10,6 +10,7 @@ A social marketplace for services in your neighbourhood. Made during the hackath
 * AngularJS for the frontend
 * Material Angular as CSS framework
 * Socket.io for real-time communications
+* JWT for authentication
 
 ##Running the frontend
 
@@ -21,7 +22,7 @@ A social marketplace for services in your neighbourhood. Made during the hackath
 ##Running the backend
 
 1. Install Node.js and the nodemon library (```npm install -g nodemon```)
-2. Run MongoDB and MySQL (import the sqldump from root if necessary) and change the values in ```config/settings.js``` according to your values.
+2. Run MongoDB and change the values in ```config/settings.js``` according to your database settings.
 3. In your command line, execute ```npm install``` to install all the necessary dependencies.
 4. In your command line, execute ```nodemon app.js``` to run application
 5. Go to [http://localhost:3000/api/{whatever api endpoint}](http://localhost:3000/api/{whatever api endpoint}) to access the backend
